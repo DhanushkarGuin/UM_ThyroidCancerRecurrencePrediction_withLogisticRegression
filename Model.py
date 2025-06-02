@@ -35,14 +35,17 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 
 from sklearn.linear_model import LogisticRegression
 model = LogisticRegression(max_iter=1000)
+# No need of regularization here, the metrics of evaluation remain approximately same
 model.fit(X_train,Y_train)
 
 Y_pred = model.predict(X_test)
+#print('Predictions:', Y_pred)
 
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score
 print("Accuracy %:", (accuracy_score(Y_test, Y_pred))*100)
 print("Confusion Matrix:\n", confusion_matrix(Y_test, Y_pred))
-print("Classification Report:\n", classification_report(Y_test, Y_pred))
+print("Precision:", (precision_score(Y_test, Y_pred)))
+print("Recall:", recall_score(Y_test, Y_pred))
 
 print("Please enter details to check your prediction!")
 age = int(input("Enter Age in Years:"))
