@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 dataset = pd.read_csv("dataset.csv")
-#print(dataset)
+# print(dataset)
 dataset['Gender'] = dataset['Gender'].map({'F': 0, 'M': 1})
 dataset['Focality'] = dataset['Focality'].map({'Uni-Focal': 0, 'Multi-Focal': 1})
 dataset['M'] = dataset['M'].map({'M0': 0, 'M1':1})
@@ -11,7 +11,7 @@ dataset['M'] = dataset['M'].map({'M0': 0, 'M1':1})
 binary_columns = ['Smoking', 'Hx Smoking', 'Hx Radiothreapy','Recurred']
 for col in binary_columns:
     dataset[col] = dataset[col].map({'No': 0, 'Yes': 1})
-#print(dataset)
+# print(dataset)
 
 X = dataset.iloc[:,:-1]
 Y = dataset.iloc[:,-1].values
@@ -28,7 +28,7 @@ non_encoded_col_names = [col for i, col in enumerate(dataset.columns[:-1]) if i 
 all_col_names = list(encoded_col_names) + non_encoded_col_names
 
 X_df = pd.DataFrame(X, columns=all_col_names)
-#print(X_df.head())
+# print(X_df.head())
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
@@ -39,7 +39,7 @@ model = LogisticRegression(max_iter=1000)
 model.fit(X_train,Y_train)
 
 Y_pred = model.predict(X_test)
-#print('Predictions:', Y_pred)
+# print('Predictions:', Y_pred)
 
 from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score
 print("Accuracy %:", (accuracy_score(Y_test, Y_pred))*100)
